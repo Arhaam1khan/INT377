@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    // This is the magic block you were missing!
+    tools {
+        nodejs 'Node22'
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -13,8 +18,6 @@ pipeline {
             steps {
                 echo 'Building the React/Vite Frontend...'
                 dir('frontend') {
-                    // Using sh for Linux/Mac, bat for Windows. 
-                    // Since Jenkins is running in a Linux Docker container, we use sh.
                     sh 'npm install'
                     sh 'npm run build'
                 }
@@ -34,8 +37,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Simulating deployment to Kubernetes/Docker...'
-                // In a full production setup, this is where you would run 
-                // your docker-compose or kubectl commands!
                 echo 'Deployment Successful!'
             }
         }
