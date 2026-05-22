@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    triggers {
+        pollSCM('* * * * *') 
+    }
 
     // This is the magic block you were missing!
     tools {

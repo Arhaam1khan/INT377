@@ -1,122 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import './App.css'; // Assuming you have some basic CSS
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div style={{ padding: '50px', fontFamily: 'Arial, sans-serif', backgroundColor: '#1e1e2e', color: '#cdd6f4', minHeight: '100vh' }}>
+      <h1>🟢 System Health Dashboard</h1>
+      <p>Live monitoring for DevOps Infrastructure.</p>
+      
+      <div style={{ display: 'flex', gap: '20px', marginTop: '30px' }}>
+        {/* Frontend Status Box */}
+        <div style={{ border: '1px solid #a6e3a1', padding: '20px', borderRadius: '8px', width: '250px', backgroundColor: '#313244' }}>
+          <h3>React Frontend UI</h3>
+          <p style={{ color: '#a6e3a1', fontWeight: 'bold' }}>Status: ONLINE</p>
+          <small>Port: 3001</small>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        {/* Backend Status Box */}
+        <div style={{ border: '1px solid #a6e3a1', padding: '20px', borderRadius: '8px', width: '250px', backgroundColor: '#313244' }}>
+          <h3>Node.js Backend API</h3>
+          <p style={{ color: '#a6e3a1', fontWeight: 'bold' }}>Status: ONLINE</p>
+          <small>Port: 3000</small>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {/* Database Status Box */}
+        <div style={{ border: '1px solid #a6e3a1', padding: '20px', borderRadius: '8px', width: '250px', backgroundColor: '#313244' }}>
+          <h3>MySQL Database</h3>
+          <p style={{ color: '#a6e3a1', fontWeight: 'bold' }}>Status: ONLINE</p>
+          <small>Port: 3306</small>
+        </div>
+      </div>
+      
+      <p style={{ marginTop: '50px', color: '#f38ba8' }}>
+        <em>Last Deployment triggered via Jenkins CI/CD</em>
+      </p>
+    </div>
+  );
 }
 
-export default App
+export default App;
