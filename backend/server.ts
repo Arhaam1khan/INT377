@@ -3,17 +3,37 @@ import mysql from 'mysql2/promise';
 import cors from 'cors';
 
 const app = express();
+
+// Enable CORS and JSON parsing
 app.use(cors());
 app.use(express.json());
 
-// Database connection (We will containerize this later!)
+// Single Database Connection Pool (Points to Docker)
 const pool = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'db',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'password',
-    database: 'portfolio_db'
+    database: process.env.MYSQL_DATABASE || 'portfolio_db'
 });
 
+// The Live Health Check Endpoint
+app.get('/api/health', async (req, res) => {
+    try {
+        await pool.query('SELECT 1'); 
+        res.json({ 
+            backend: 'ONLINE', 
+            database: 'ONLINE' 
+        });
+    } catch (error) {
+        console.error("Database connection failed:", error);
+        res.status(500).json({ 
+            backend: 'ONLINE', 
+            database: 'OFFLINE' 
+        });
+    }
+});
+
+// Project Endpoint
 app.get('/api/projects', async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM projects');
@@ -23,6 +43,7 @@ app.get('/api/projects', async (req, res) => {
     }
 });
 
+// Contact Endpoint
 app.post('/api/contact', async (req, res) => {
     const { name, email, message } = req.body;
     try {
@@ -36,6 +57,7 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
+// Visit Logger Endpoint
 app.get('/api/visit', async (req, res) => {
     const ip = req.ip || req.socket.remoteAddress;
     const agent = req.headers['user-agent'];

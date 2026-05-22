@@ -10,9 +10,9 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "express": "^4.19.2",
-    "mysql2": "^3.9.7"
+    "mysql2": "^3.22.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
