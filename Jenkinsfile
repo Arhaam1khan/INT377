@@ -31,6 +31,7 @@ pipeline {
             steps {
                 echo 'Building the Node.js API...'
                 dir('backend') {
+                    sh 'rm -rf node_modules package-lock.json'
                     sh 'npm install'
                     sh 'npm run build'
                 }
