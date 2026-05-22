@@ -1,10 +1,12 @@
 pipeline {
     agent any
+
+    // Auto-trigger every minute
     triggers {
         pollSCM('* * * * *') 
     }
 
-    // This is the magic block you were missing!
+    // Inject Node 22
     tools {
         nodejs 'Node22'
     }
@@ -28,8 +30,10 @@ pipeline {
         }
 
         stage('Build Backend') {
+            steps {
                 echo 'Building the Node.js API...'
                 dir('backend') {
+                    // Wipes out old cached files to prevent permission errors
                     sh 'rm -rf node_modules package-lock.json'
                     sh 'npm install'
                     sh 'npm run build'
